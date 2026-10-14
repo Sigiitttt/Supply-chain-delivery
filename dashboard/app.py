@@ -198,13 +198,13 @@ def load_coords():
     return pd.read_csv(COORD_PATH) if COORD_PATH.exists() else None
 
 
-if not FACT_PATH.exists():
-    st.error("File `outputs/fact_order_delivery.csv` belum ada. Jalankan dulu notebook `01_data_audit_and_eda.ipynb`.")
+if not FACT_PARQUET.exists() and not FACT_PATH.exists():
+    st.error("File data analitis belum ada. Harap pastikan `outputs/fact_order_delivery.parquet` atau `.csv` tersedia.")
     st.stop()
 
 fact = load_fact()
 coords = load_coords()
-pairs = load_seller_pairs() if (RAW_DIR / "olist_order_items_dataset.csv").exists() else None
+pairs = load_seller_pairs()
 
 # ----------------------------------------------------------------------------
 # Filter (sidebar)
