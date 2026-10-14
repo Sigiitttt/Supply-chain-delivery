@@ -57,6 +57,8 @@ Dashboard interaktif dibuat menggunakan **Python (Streamlit & Plotly)** dengan t
    * Evaluasi penjual dengan filter minimal jumlah pesanan (agar adil).
    * Daftar penjual bermasalah dengan tingkat keterlambatan di atas 15%.
    * Matriks rute asal penjual ke tujuan pembeli (*heatmap corridor*).
+  
+https://supply-chain-delivery-3agjng7qm92o9p3u3kufed.streamlit.app/
 
 ## 🛠️ Alat dan Teknologi yang Digunakan
 * **SQL (PostgreSQL):** Untuk audit data mentah, validasi duplikat, dan logika pembuatan tabel analitis.
