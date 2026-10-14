@@ -156,14 +156,25 @@ def takeaway(text):
 # ----------------------------------------------------------------------------
 # Data
 # ----------------------------------------------------------------------------
+FACT_PARQUET = BASE_DIR / "outputs" / "fact_order_delivery.parquet"
+SELLER_PAIRS_PARQUET = BASE_DIR / "outputs" / "order_seller_pairs.parquet"
+
 @st.cache_data(show_spinner="Memuat data...")
 def load_fact():
-    df = pd.read_csv(
-        FACT_PATH,
-        parse_dates=["order_purchase_timestamp", "order_delivered_customer_date",
-                     "order_estimated_delivery_date", "purchase_month"],
-        low_memory=False,
-    )
+    if FACT_PARQUET.exists():
+        df = pd.read_parquet(FACT_PARQUET)
+    elif FACT_PATH.exists():
+        df = pd.read_csv(
+            FACT_PATH,
+            parse_dates=["order_purchase_timestamp", "order_delivered_customer_date",
+                         "order_estimated_delivery_date", "purchase_month"],
+            low_memory=False,
+        )
+    else:
+        return None
+    for c in ["order_purchase_timestamp", "order_delivered_customer_date", "order_estimated_delivery_date", "purchase_month"]:
+        if c in df.columns:
+            df[c] = pd.to_datetime(df[c])
     df["evaluable"] = df["delivery_result"].isin(["on_time", "late"])
     df["late"] = df["delivery_result"].eq("late")
     return df
@@ -171,9 +182,15 @@ def load_fact():
 
 @st.cache_data(show_spinner="Menyiapkan data seller...")
 def load_seller_pairs():
-    items = pd.read_csv(RAW_DIR / "olist_order_items_dataset.csv", usecols=["order_id", "seller_id"])
-    sellers = pd.read_csv(RAW_DIR / "olist_sellers_dataset.csv", usecols=["seller_id", "seller_state", "seller_city"])
-    return items.drop_duplicates().merge(sellers, on="seller_id", how="left")
+    if SELLER_PAIRS_PARQUET.exists():
+        return pd.read_parquet(SELLER_PAIRS_PARQUET)
+    item_csv = RAW_DIR / "olist_order_items_dataset.csv"
+    seller_csv = RAW_DIR / "olist_sellers_dataset.csv"
+    if item_csv.exists() and seller_csv.exists():
+        items = pd.read_csv(item_csv, usecols=["order_id", "seller_id"])
+        sellers = pd.read_csv(seller_csv, usecols=["seller_id", "seller_state", "seller_city"])
+        return items.drop_duplicates().merge(sellers, on="seller_id", how="left")
+    return None
 
 
 @st.cache_data

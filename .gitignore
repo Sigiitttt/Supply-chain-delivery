@@ -3,11 +3,12 @@ data/raw/*
 !data/raw/.gitkeep
 dataset/archive/*.csv
 
-# Generated analytical outputs (keep small summaries & coordinates, exclude large 35MB fact CSV)
+# Generated analytical outputs (exclude raw large CSVs, include optimized Parquet & summaries)
 outputs/*.csv
 !outputs/eda_kpi_summary.csv
 !outputs/brazil_states_coordinates.csv
 !outputs/.gitkeep
+!outputs/*.parquet
 
 # Python / Jupyter temporary files
 __pycache__/
