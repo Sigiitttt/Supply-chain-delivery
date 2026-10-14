@@ -1,0 +1,2 @@
+all_orders,delivered_status_orders,evaluable_delivered_orders,on_time_orders,late_orders,on_time_rate_pct,late_rate_pct,avg_delivery_cycle_days,avg_delay_days_among_late_orders,delivered_but_dates_missing
+99441,96478,96470,89936,6534,93.23,6.77,12.56,10.62,8

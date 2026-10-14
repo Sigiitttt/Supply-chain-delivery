@@ -1,0 +1,17 @@
+# Raw data downloaded from Kaggle (do not commit large raw dataset files)
+data/raw/*
+!data/raw/.gitkeep
+dataset/archive/*.csv
+
+# Generated analytical outputs (keep small summaries & coordinates, exclude large 35MB fact CSV)
+outputs/*.csv
+!outputs/eda_kpi_summary.csv
+!outputs/brazil_states_coordinates.csv
+!outputs/.gitkeep
+
+# Python / Jupyter temporary files
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.env
+.DS_Store
