@@ -1,3 +1,4 @@
+![alt text](image.png)
 # 📦 Analisis Rantai Pasok & Performa Pengiriman (Control Tower)
 ### Analisis Logistik End-to-End & Dashboard Pusat Kendali Interaktif
 
@@ -56,52 +57,6 @@ Dashboard interaktif dibuat menggunakan **Python (Streamlit & Plotly)** dengan t
    * Evaluasi penjual dengan filter minimal jumlah pesanan (agar adil).
    * Daftar penjual bermasalah dengan tingkat keterlambatan di atas 15%.
    * Matriks rute asal penjual ke tujuan pembeli (*heatmap corridor*).
-
----
-
-## 📁 Struktur Folder Proyek
-```text
-├── dashboard/
-│   └── app.py                      # Aplikasi dashboard interaktif (Streamlit + Plotly)
-├── data/
-│   └── raw/                        # Folder file CSV mentah dataset Olist
-├── docs/                           # Dokumentasi perencanaan analisis, kamus data, & KPI
-├── notebooks/
-│   └── 01_data_audit_and_eda.ipynb # Notebook audit data dan analisis eksploratif (Bahasa Indonesia)
-├── outputs/
-│   ├── fact_order_delivery.csv     # Tabel analitis bersih siap pakai (1 baris = 1 pesanan)
-│   ├── eda_kpi_summary.csv         # Ringkasan angka KPI hasil audit
-│   └── brazil_states_coordinates.csv # Titik koordinat peta negara bagian Brasil
-├── sql/
-│   ├── 01_data_audit.sql           # Query audit data dan validasi kunci unik
-│   ├── 02_build_fact_order_delivery.sql # Query pembentukan tabel fakta pesanan
-│   ├── 03_build_fact_order_seller_delivery.sql # Query analisis pada level penjual
-│   └── 04_kpi_analysis.sql         # Query perhitungan KPI bisnis
-├── PROJECT_STATE_MEMORY.md         # Catatan memori alur proyek
-└── requirements.txt                # Daftar pustaka (library) Python
-```
-
----
-
-## 🚀 Cara Menjalankan Proyek di Komputer Lokal
-
-### 1. Persiapkan Environment Python
-Buka terminal / PowerShell di folder proyek ini:
-```bash
-# Pastikan library sudah terpasang
-pip install -r requirements.txt
-pip install streamlit plotly
-```
-
-### 2. Jalankan Dashboard
-Cukup jalankan perintah berikut:
-```bash
-python -m streamlit run dashboard/app.py
-```
-Dashboard akan otomatis terbuka di browser Anda pada alamat:
-👉 **`http://localhost:8501`**
-
----
 
 ## 🛠️ Alat dan Teknologi yang Digunakan
 * **SQL (PostgreSQL):** Untuk audit data mentah, validasi duplikat, dan logika pembuatan tabel analitis.
